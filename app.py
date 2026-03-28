@@ -194,10 +194,7 @@ def calculate(export_val_usd, usd_inr, swift_fx_spread_pct, working_cap_rate_pct
 # SIDEBAR
 # ─────────────────────────────────────────────
 st.sidebar.image(
-    "https://upload.wikimedia.org/wikipedia/en/thumb/8/84/"
-    "Sri_Guru_Gobind_Singh_College_of_Commerce_Logo.svg/"
-    "1200px-Sri_Guru_Gobind_Singh_College_of_Commerce_Logo.svg.png",
-    width=130,
+    "logo.png", width=130,
 )
 st.sidebar.title("BRICS CBDC Simulator")
 st.sidebar.caption("PGDIM Research Project · SGGSCC, Delhi University")
@@ -795,12 +792,7 @@ elif page == "🎓 About the Research":
 
     col_logo, col_info = st.columns([1, 3], gap="large")
     with col_logo:
-        st.image(
-            "https://upload.wikimedia.org/wikipedia/en/thumb/8/84/"
-            "Sri_Guru_Gobind_Singh_College_of_Commerce_Logo.svg/"
-            "1200px-Sri_Guru_Gobind_Singh_College_of_Commerce_Logo.svg.png",
-            width=180,
-        )
+        st.image("logo.png", width=180)
     with col_info:
         st.markdown(
             """
