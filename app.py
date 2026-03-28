@@ -329,12 +329,11 @@ if page == "💱 Financial Simulator":
             text="Cost (INR)",
             hover_data={"Net Received (INR)": ":,.0f", "Cost (INR)": ":,.0f"},
             title="Total Transaction Cost Comparison (Chapter 4, Table 5)",
+        )
         fig_bar.update_traces(
             texttemplate="₹%{text:,.0f}",
-            textposition="inside",
-            textfont_size=13,
-            textfont_color="white",
-            insidetextanchor="middle",
+            textposition="outside",
+            textfont_size=14,
         )
         fig_bar.update_layout(
             height=380,
@@ -343,10 +342,9 @@ if page == "💱 Financial Simulator":
             paper_bgcolor="rgba(0,0,0,0)",
             font_color="#e2e8f0",
             title_font_size=13,
-            yyaxis=dict(showgrid=True, gridcolor="#334155",
-                   range=[0, max(r["total_swift_cost"], r["total_cbdc_cost"]) * 1.15]),
+            yaxis=dict(showgrid=True, gridcolor="#334155"),
             xaxis=dict(showgrid=False),
-            uniformtext_minsize=10, uniformtext_mode="hide",
+            uniformtext_minsize=12, uniformtext_mode="hide",
         )
         st.plotly_chart(fig_bar, use_container_width=True)
 
@@ -375,13 +373,12 @@ if page == "💱 Financial Simulator":
             title="Stacked Cost Breakdown (Chapter 4, Tables 3 & 4)",
         )
         fig_stack.update_layout(
-            height=420,
+            height=350,
             plot_bgcolor="rgba(0,0,0,0)",
             paper_bgcolor="rgba(0,0,0,0)",
             font_color="#e2e8f0",
             title_font_size=13,
-            legend=dict(orientation="h", yanchor="top", y=-0.25, xanchor="center", x=0.5, font=dict(size=11),
-            margin=dict(b=120),
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0),
             yaxis=dict(showgrid=True, gridcolor="#334155"),
             xaxis=dict(showgrid=False),
         )
