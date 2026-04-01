@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import yfinance as yf
+import requests
 from datetime import datetime
 
 # ─────────────────────────────────────────────
@@ -81,22 +81,24 @@ THESIS_RATES = {
 
 @st.cache_data(ttl=3600)
 def get_live_rates():
-    tickers = {
-        "INR": "INR=X",
-        "CNY": "CNY=X",
-        "RUB": "RUB=X",
-        "BRL": "BRL=X",
-        "ZAR": "ZAR=X",
-    }
-    rates = {}
     try:
-        for currency, ticker in tickers.items():
-            data = yf.download(ticker, period="1d", progress=False, auto_adjust=True)
-            if not data.empty:
-                rates[currency] = round(float(data["Close"].iloc[-1]), 2)
-            else:
-                rates[currency] = THESIS_RATES[currency]
-        return rates, True          # True = live data fetched
+        response = requests.get(
+            "https://open.er-api.com/v6/latest/USD",
+            timeout=10
+        )
+        data = response.json()
+        if data.get("result") == "success":
+            r = data["rates"]
+            rates = {
+                "INR": round(r["INR"], 2),
+                "CNY": round(r["CNY"], 2),
+                "RUB": round(r["RUB"], 2),
+                "BRL": round(r["BRL"], 2),
+                "ZAR": round(r["ZAR"], 2),
+            }
+            return rates, True
+        else:
+            return THESIS_RATES.copy(), False
     except Exception:
         return THESIS_RATES.copy(), False   # False = using fallback
 
